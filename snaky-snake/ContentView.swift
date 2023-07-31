@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var dir = direction.up
     @State var positionArray = [CGPoint(x: 0, y: 0)]
     @State var foodPosition = CGPoint(x: 0, y: 0)
+    @State var score = 0
     let snakeSize: CGFloat = 10
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
@@ -60,6 +61,13 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color.black.opacity(0.8)
+            ZStack {
+                Text("Score: \(score)")
+                    .foregroundColor(Color.green)
+            }.alignmentGuide(.leading) { _ in 0 }
+                .alignmentGuide(.top) { _ in 0 }
+                .offset(x: 150, y: -350)
+            
             ZStack{
                 ForEach (0..<positionArray.count, id: \.self) { index in
                     Rectangle()
@@ -112,6 +120,7 @@ struct ContentView: View {
                 if self.positionArray[0] == self.foodPosition {
                     self.positionArray.append(self.positionArray[0])
                     self.foodPosition = self.changeRectPos()
+                    self.score += 1
                 }
             }
         }
