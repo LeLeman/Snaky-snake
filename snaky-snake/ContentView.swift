@@ -83,13 +83,23 @@ struct ContentView: View {
             
             if gameOver {
                 VStack
-                    .init(spacing: 10){
-                        Text("GAME OVER")
-                            .foregroundColor(Color.red)
+                    .init(spacing: 20){
                         VStack{
+                            Text("GAME OVER")
+                                .foregroundColor(Color.red)
+                                .font(.system(size: 50))
+                            Text("YOUR SCORE: \(score)")
+                                .foregroundColor(Color.red)
+                                .font(.system(size: 40))
+                        }
+                        VStack
+                            .init(spacing: 20){
                             Button("New Game", action: {})
+                                .font(.system(size: 25))
                             Button("Main Menu", action: {})
+                                .font(.system(size: 25))
                             Button("Quit", action: {})
+                                .font(.system(size: 25))
                         }
                     }
             }
