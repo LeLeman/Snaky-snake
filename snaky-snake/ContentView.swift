@@ -82,8 +82,16 @@ struct ContentView: View {
             }
             
             if gameOver {
-                Text("GAME OVER")
-                    .foregroundColor(Color.red)
+                VStack
+                    .init(spacing: 10){
+                        Text("GAME OVER")
+                            .foregroundColor(Color.red)
+                        VStack{
+                            Button("New Game", action: {})
+                            Button("Main Menu", action: {})
+                            Button("Quit", action: {})
+                        }
+                    }
             }
         } .onAppear() {
             self.foodPosition = self.changeRectPos()
