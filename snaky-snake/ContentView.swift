@@ -109,8 +109,11 @@ struct ContentView: View {
                                 .font(.system(size: 25))
                             Button("Main Menu", action: {})
                                 .font(.system(size: 25))
-                            Button("Quit", action: {})
+                            Button("Quit", action: {
+                                exit(0)
+                            })
                                 .font(.system(size: 25))
+                                
                         }
                     }
             }
