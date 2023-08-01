@@ -13,6 +13,7 @@ struct ContentView: View {
     @State var positionArray = [CGPoint(x: 0, y: 0)]
     @State var foodPosition = CGPoint(x: 0, y: 0)
     @State var score = 0
+    @State var isPlaying = true
     let snakeSize: CGFloat = 10
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
@@ -55,6 +56,9 @@ struct ContentView: View {
             positionArray[index] = prev
             prev = current
         }
+        if positionArray.dropFirst().contains(positionArray[0]) {
+            gameOver.toggle()
+        }
     }
     
     
@@ -94,7 +98,14 @@ struct ContentView: View {
                         }
                         VStack
                             .init(spacing: 20){
-                            Button("New Game", action: {})
+                            Button("New Game", action: {
+                                gameOver = false
+                                isPlaying = true
+                                positionArray = [CGPoint(x: 0, y: 0)]
+                                score = 0
+                                foodPosition = changeRectPos()
+                                positionArray[0] = changeRectPos()
+                            })
                                 .font(.system(size: 25))
                             Button("Main Menu", action: {})
                                 .font(.system(size: 25))
