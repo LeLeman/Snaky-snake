@@ -14,10 +14,9 @@ struct ContentView: View {
     @State var foodPosition = CGPoint(x: 0, y: 0)
     @State var score = 0
     @State var isPlaying = true
+    
     let snakeSize: CGFloat = 10
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-    
-    
     let minX = UIScreen.main.bounds.minX
     let maxX = UIScreen.main.bounds.maxX
     let minY = UIScreen.main.bounds.minY
@@ -26,7 +25,6 @@ struct ContentView: View {
     func changeRectPos() -> CGPoint {
         let rows = Int(maxX/snakeSize)
         let cols = Int(maxY/snakeSize)
-        
         let randomX = Int.random(in: 1..<rows) * Int(snakeSize)
         let randomY = Int.random(in: 1..<cols) * Int(snakeSize)
         
@@ -60,7 +58,6 @@ struct ContentView: View {
             gameOver.toggle()
         }
     }
-    
     
     var body: some View {
         ZStack {
@@ -98,23 +95,20 @@ struct ContentView: View {
                         }
                         VStack
                             .init(spacing: 20){
-                            Button("New Game", action: {
-                                gameOver = false
-                                isPlaying = true
-                                positionArray = [CGPoint(x: 0, y: 0)]
-                                score = 0
-                                foodPosition = changeRectPos()
-                                positionArray[0] = changeRectPos()
-                            })
+                                Button("New Game", action: {
+                                    gameOver = false
+                                    isPlaying = true
+                                    positionArray = [CGPoint(x: 0, y: 0)]
+                                    score = 0
+                                    foodPosition = changeRectPos()
+                                    positionArray[0] = changeRectPos()
+                                })
                                 .font(.system(size: 25))
-                            Button("Main Menu", action: {})
+                                Button("Quit", action: {
+                                    exit(0)
+                                })
                                 .font(.system(size: 25))
-                            Button("Quit", action: {
-                                exit(0)
-                            })
-                                .font(.system(size: 25))
-                                
-                        }
+                            }
                     }
             }
         } .onAppear() {
